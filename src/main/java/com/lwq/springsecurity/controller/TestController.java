@@ -39,4 +39,13 @@ public class TestController {
         System.out.println("我执行了");
         return R.ok("你好世界3");
     }
+
+    //SPEL表达式
+    @PreAuthorize("@myEx.myHasAuthority('hello4')")
+    @ApiOperation("你好世界4!")
+    @GetMapping("/hello4")
+    public R hello4() {
+        System.out.println("我执行了");
+        return R.ok("你好世界4");
+    }
 }

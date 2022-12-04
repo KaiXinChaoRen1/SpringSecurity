@@ -39,7 +39,7 @@ public class WebSecurityConfig {
         http
                 //把过滤器添加到某个过滤器之前(我们的需要注入)
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
-                //前后端分离要关闭csrf,为什么后面会讲,老子等你
+                //关闭防止csrf攻击,因为前后端分离使用token这种方式不惧csrf攻击,6
                 .csrf().disable()
                 //禁止通过session获取SecurityContext
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)

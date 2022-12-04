@@ -39,9 +39,9 @@ public class LoginService {
         //需要这样获取AuthenticationManager
         AuthenticationManager authenticationManager = authenticationConfiguration.getAuthenticationManager();
         Authentication authentication = authenticationManager.authenticate(authenticationToken);
-        //失败则提示
+        //失败则提示(在我观察,密码输错了会在前面就报错)
         if(Objects.isNull(authentication)){
-            throw new RuntimeException("认证失败");
+            throw new RuntimeException("出错啦,来控制台看看");
         }
         //成功则生成jwt
         LoginUser correctUser = (LoginUser) authentication.getPrincipal();

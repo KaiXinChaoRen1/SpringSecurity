@@ -27,7 +27,6 @@ public class LoginService {
     private RedisUtils redisUtils;
 
 
-
     /**
      * 真正的登录逻辑
      */
@@ -43,20 +42,19 @@ public class LoginService {
         Authentication authentication = authenticationManager.authenticate(authenticationToken);
 
         //失败则提示(在我观察,密码输错了会在前面就报错)
-        if(Objects.isNull(authentication)){
+        if (Objects.isNull(authentication)) {
             throw new RuntimeException("出错啦,来控制台看看");
         }
         //成功则生成jwt
         LoginUser correctUser = (LoginUser) authentication.getPrincipal();
-        long id=correctUser.getSysUser().getId();
+        long id = correctUser.getSysUser().getId();
         String token = JwtHelper.createToken(id);
 
         //将用户数据保存到redis中
-        HashMap<String, String> resMap = new HashMap<>();
-        resMap.put("token",token);
-        redisUtils.set("login:"+String.valueOf(id),correctUser,3l, TimeUnit.DAYS);
+        redisUtils.set("login:" + String.valueOf(id), correctUser, 3l, TimeUnit.DAYS);
+
         //返回数据
-        return R.ok(resMap);
+        return R.ok(token);
     }
 
     public R logout() {
@@ -66,9 +64,9 @@ public class LoginService {
         Long id = loginUser.getSysUser().getId();
         //删除redis中数据
         Boolean delete = redisUtils.delete("login:" + String.valueOf(id));
-        if(delete){
+        if (delete) {
             return R.ok("删除成功");
-        }else{
+        } else {
             return R.fail("删除失败");
         }
     }

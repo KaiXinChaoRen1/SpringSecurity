@@ -23,7 +23,7 @@ public class LoginUser implements UserDetails {
 
     private List<String> permissions;
 
-    //redis中没必要序列化这个,使用hutool的序列化忽略属性是加transient
+    //redis中没必要序列化这个,如果使用hutool的序列化要忽略属性应该加transient
     @JSONField(serialize = false)
     private  List<SimpleGrantedAuthority> authorities;
 
@@ -56,7 +56,7 @@ public class LoginUser implements UserDetails {
     }
 
     /**
-     * 没过期
+     * 下面这些设为true表示可用
      */
     @Override
     public boolean isAccountNonExpired() {

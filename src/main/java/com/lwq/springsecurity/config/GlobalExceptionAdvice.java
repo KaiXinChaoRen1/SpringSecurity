@@ -15,11 +15,10 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalExceptionAdvice {
 
 
-
     @ExceptionHandler(RuntimeException.class)
     public String handleRuntimeException(RuntimeException e) {
         log.error(e.toString(), e);
-        return "全局异常捕获RuntimeException,服务器出现错误啦~~--->"+e.getMessage();
+        return "全局异常捕获RuntimeException,服务器出现错误啦~~--->" + e.getMessage();
     }
 
     //下面两个是我自己加的
@@ -30,7 +29,6 @@ public class GlobalExceptionAdvice {
         return "全局异常捕获,权限异常,你tm没有权限";
     }
 
-    //注意异常类别引错
     @ExceptionHandler(BadCredentialsException.class)
     public String handleAccessDeniedException(BadCredentialsException e) {
         log.error(e.toString(), e);

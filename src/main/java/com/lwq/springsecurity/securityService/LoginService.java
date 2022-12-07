@@ -32,13 +32,16 @@ public class LoginService {
      * 真正的登录逻辑
      */
     public R login(SysUser sysUser) throws Exception {
-        //AuthenticationManager         进行用户认证
+        //委托AuthenticationManager进行用户认证
+        //封装数据
         String username = sysUser.getUserName();
         String password = sysUser.getPassword();
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, password);
-        //需要这样获取AuthenticationManager
+        //获取AuthenticationManager
         AuthenticationManager authenticationManager = authenticationConfiguration.getAuthenticationManager();
+        //认证
         Authentication authentication = authenticationManager.authenticate(authenticationToken);
+
         //失败则提示(在我观察,密码输错了会在前面就报错)
         if(Objects.isNull(authentication)){
             throw new RuntimeException("出错啦,来控制台看看");
@@ -47,12 +50,11 @@ public class LoginService {
         LoginUser correctUser = (LoginUser) authentication.getPrincipal();
         long id=correctUser.getSysUser().getId();
         String token = JwtHelper.createToken(id);
-        HashMap<String, String> resMap = new HashMap<>();
-        resMap.put("token",token);
 
         //将用户数据保存到redis中
+        HashMap<String, String> resMap = new HashMap<>();
+        resMap.put("token",token);
         redisUtils.set("login:"+String.valueOf(id),correctUser,3l, TimeUnit.DAYS);
-
         //返回数据
         return R.ok(resMap);
     }

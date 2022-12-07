@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * 自定义security处理认证异常,写好之后还需要配置给security
+ * 自定义security处理'认证'异常,写好之后还需要配置给security
  */
 @Component
 public class AuthenticationEntryPointImpl implements AuthenticationEntryPoint {

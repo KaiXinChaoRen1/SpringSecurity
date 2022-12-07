@@ -17,7 +17,7 @@ import java.util.List;
 
 /**
  * 手动实现UserDetailsService
- *      根据username获取用户的所有信息
+ *      逻辑就是根据username获取用户的所有信息
  */
 
 @Service

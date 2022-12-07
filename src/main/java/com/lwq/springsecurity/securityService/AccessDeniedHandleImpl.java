@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * 自定义security处理权限异常,写好之后还需要配置给security
+ * 自定义security处理'权限'异常,写好之后还需要配置给security
  */
 @Component
 public class AccessDeniedHandleImpl implements AccessDeniedHandler {

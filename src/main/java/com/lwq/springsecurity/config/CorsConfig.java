@@ -6,7 +6,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
- * springboot配置跨域,(security还需要再配)(微服务的话,网关配置还不太一样好像)
+ * springboot配置跨域,(security还需要再配)(微服务的话,是通过网关配置的跟这个还不太一样好像)
  */
 @Configuration
 public class CorsConfig implements WebMvcConfigurer {
